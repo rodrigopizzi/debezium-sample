@@ -1,0 +1,26 @@
+POST http://localhost:8083/connectors
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "inventory-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+    "tasks.max": "1",
+    "database.hostname": "mysql",
+    "database.port": "3306",
+    "database.user": "root",
+    "database.password": "debezium",
+    "database.server.id": "184054",
+    "database.server.name": "dbserver1",
+    "database.include.list": "order",
+    "table.include.list": "order.outbox",
+    "database.history.kafka.bootstrap.servers": "broker:29092",
+    "database.history.kafka.topic": "dbhistory.order"
+  }
+}
+
+###
+
+GET http://localhost:8083/connectors/inventory-connector
+Accept: application/json
